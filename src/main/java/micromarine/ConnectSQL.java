@@ -1,62 +1,64 @@
+////// [[[THIS IS A CORE IMPORTANT FILE]]]
+
 package micromarine;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+
  // 9-8 this gives succes message connecting to new mysql db
 public class ConnectSQL {
-    public static void main(String[] args) {
- 
-        // creates three different Connection objects
-        Connection conn1 = null;
-        // Connection conn2 = null;
-        // Connection conn3 = null;
- 
+    static String user = "mmuser";
+    static String password = "N14llsqf5077!";
+    static String url = "jdbc:mysql://localhost:3306/micromarinedb";
+    static String driver = "com.mysql.cj.jdbc.Driver";
+
+    public static Connection GetCon(){
+    Connection con = null;
+    try {
+        Class.forName(driver);
         try {
-            // connect way #1
-            String url1 = "jdbc:mysql://localhost:3306/micromarinedb";
-            String user = "mmuser";
-            String password = "N14llsqf5077!";
- 
-            conn1 = DriverManager.getConnection(url1, user, password);
-            if (conn1 != null) {
-                System.out.println("omg yay it connected to the database");
-            }
- 
-            // // connect way #2
-            // String url2 = "jdbc:mysql://localhost:3306/micromarine?user=mmuser&password=N14llsqf5077!";
-            // conn2 = DriverManager.getConnection(url2);
-            // if (conn2 != null) {
-            //     System.out.println("Connected to the database test2");
-            // }
- 
-            // // connect way #3
-            // String url3 = "jdbc:mysql://localhost:3306/test3";
-            // Properties info = new Properties();
-            // info.put("user", "root");
-            // info.put("password", "secret");
- 
-            // conn3 = DriverManager.getConnection(url3, info);
-            // if (conn3 != null) {
-            //     System.out.println("Connected to the database test3");
-            // }
-        } catch (SQLException ex) {
-            System.out.println("An error occurred. can't connect to db");
-            ex.printStackTrace();
-        
-        }
-        finally {
-            if (conn1 != null) {
-                try {
-                    conn1.close();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
+        con = DriverManager.getConnection(url, user, password);
+    } catch (SQLException e){
+        throw new RuntimeException(e);
+}
+
+    } catch (ClassNotFoundException e) {
+        throw new RuntimeException(e);
+    }
+
+return con;
 }
     }
-}
+
+
+    // public static Connection getConn() {
+    //     Connection conn1 = null;
+    //     try {
+    //         String url1 = "jdbc:mysql://localhost:3306/micromarinedb";
+    //         String user = "mmuser";
+    //         String password = "N14llsqf5077!";
+ 
+    //         conn1 = DriverManager.getConnection(url1, user, password);
+    //         if (conn1 != null) {
+    //             System.out.println("omg yay it connected to the database");
+    //         }
+    //     } catch (SQLException ex) {
+    //         System.out.println("An error occurred. can't connect to db");
+    //         ex.printStackTrace();
+        
+    //     }
+    //     finally {
+    //         if (conn1 != null) {
+    //             try {
+    //                 conn1.close();
+    //             } catch (SQLException ex) {
+    //                 ex.printStackTrace();
+    //             }}}}
+
+
+
 
 
 

@@ -1,6 +1,11 @@
+////// [[[THIS IS A CORE IMPORTANT FILE]]]
+
 package micromarine;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 
@@ -15,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.fxml.Initializable;
 import java.io.IOException;
@@ -58,6 +64,9 @@ public class SubmitController implements Initializable {
     private Button submitdatabutton;
 
     @FXML
+    private Label submitsuccesslabel;
+
+    @FXML
     private TextField usastate;
 
     @FXML
@@ -69,44 +78,45 @@ public class SubmitController implements Initializable {
     @FXML
     private Label welcometitlelabel;
 
-
-
-    // @FXML
-    // void changeScenebuttonpushed(ActionEvent event) {
-    //     try {
-    //     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view.fxml"));
-    //     Parent root1 = (Parent) fxmlLoader.load();
-    //     Stage stage = new Stage();
-    //     stage.setTitle("window2");
-    //     stage.setScene(new Scene(root1));
-    //     stage.show();
-    //     }
-    //     catch (Exception e) {
-    //         System.out.println("error can't load window");
-    //     }
-
-
+    
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        throw new UnsupportedOperationException("Unimplemented method 'initialize'");
+        // throw new UnsupportedOperationException("Unimplemented method 'initialize'");
     }
+   
+
+    @FXML
+    void submitData(ActionEvent event) {
+        String insert = "insert into micromarinedb.plastics(FullName, Email, CountTotal, USAState, MaxSize, Season) values(?,?,?,?,?,?)";
+        Connection con = ConnectSQL.GetCon();
+        try {
+            PreparedStatement st = con.prepareStatement(insert);
+            st.setString(1, inputname.getText());
+            st.setString(2, email.getText());
+            st.setString(3, pcount.getText());
+            st.setString(4, usastate.getText());
+            st.setString(5, maxsize.getText());
+            st.setString(6, season.getText());
+            st.executeUpdate();
+        System.out.println(
+            "Plastics you counted: " + pcount.getText() +
+            " | Max size: " + maxsize.getText() +
+            " | Season: " + season.getText() +
+            " | State: " + usastate.getText() +
+            " | Your name: " + inputname.getText() 
+            );
+            submitsuccesslabel.setText( "THANKS FOR SUBMITTING YOUR DATA!");
+
+        }
+        catch (SQLException e){
+            System.out.println("Error - could not submit.");
+            submitsuccesslabel.setText("Error - could not submit.");
+            throw new RuntimeException(e);
+        }
+
+        }
+
+    
+
 }
 
-
-
-// // @Override
-// // public void initialize(URL location, ResourceBundle resources) {
-    
-// // viewalldatapageButton.setOnAction(new EventHandler<ActionEvent>() {
-
-// //     @Override
-// //     public void handle(ActionEvent event){
-// //         Utils.changeScene(event, "view.fxml");
-// //     }
-
-// // });
-
-// // }
-
-
-// }
