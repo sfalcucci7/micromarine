@@ -27,6 +27,7 @@ import java.io.IOException;
 
 
 public class SubmitController implements Initializable {
+    //Establishing all objects on the JavaFX page for submit
     @FXML
     private AnchorPane anchorpanesubmit;
 
@@ -84,7 +85,7 @@ public class SubmitController implements Initializable {
         // throw new UnsupportedOperationException("Unimplemented method 'initialize'");
     }
    
-
+//Main method which takes the strings inserted into the text boxes with a SQL Insert statement to insert them into the appropriate database columns
     @FXML
     void submitData(ActionEvent event) {
         String insert = "insert into micromarinedb.plastics(FullName, Email, CountTotal, USAState, MaxSize, Season) values(?,?,?,?,?,?)";
@@ -98,6 +99,7 @@ public class SubmitController implements Initializable {
             st.setString(5, maxsize.getText());
             st.setString(6, season.getText());
             st.executeUpdate();
+    //The system will print out visually a confirmation of what the user submitted and present a success message
         System.out.println(
             "Plastics you counted: " + pcount.getText() +
             " | Max size: " + maxsize.getText() +
@@ -108,9 +110,10 @@ public class SubmitController implements Initializable {
             submitsuccesslabel.setText( "THANKS FOR SUBMITTING YOUR DATA!");
 
         }
+        //General error message for unsuccessful submissions
         catch (SQLException e){
             System.out.println("Error - could not submit.");
-            submitsuccesslabel.setText("Error - could not submit.");
+            submitsuccesslabel.setText("Sorry, your data submission was unsuccessful. Make sure your state is the two-letter acronym and your plastics count is only a number. All fields are required.");
             throw new RuntimeException(e);
         }
 

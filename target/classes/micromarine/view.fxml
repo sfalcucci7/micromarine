@@ -11,20 +11,27 @@
 
 <AnchorPane fx:id="anchorpaneview" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TableView fx:id="datatable" layoutX="89.0" layoutY="108.0" prefHeight="224.0" prefWidth="421.0">
+      <TableView fx:id="datatable" layoutX="57.0" layoutY="108.0" prefHeight="261.0" prefWidth="495.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn prefWidth="93.33334350585938" text="Name" />
+          <TableColumn prefWidth="72.66668701171875" text="Email" />
+            <TableColumn prefWidth="100.66668701171875" text="Count" />
+            <TableColumn prefWidth="75.3333740234375" text="State" />
+            <TableColumn prefWidth="65.33331298828125" text="Max Size" />
+            <TableColumn prefWidth="86.0" text="Season" />
         </columns>
       </TableView>
-      <Button fx:id="searchbutton" layoutX="385.0" layoutY="72.0" mnemonicParsing="false" text="Search" />
-      <Label fx:id="viewtitlelabel" layoutX="147.0" layoutY="22.0" text="View MicroMarine Data">
+      <Button fx:id="searchbutton" layoutX="385.0" layoutY="72.0" mnemonicParsing="false" text="Search" textFill="#f00eac">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font></Button>
+      <Label fx:id="viewtitlelabel" layoutX="147.0" layoutY="22.0" text="View MicroMarine Data" textFill="#fd801a">
          <font>
             <Font name="Arial Black" size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="searchtext" layoutX="225.0" layoutY="72.0" />
+      <TextField fx:id="searchtext" layoutX="225.0" layoutY="72.0" promptText="(i.e. NJ)" />
       <Label fx:id="searchbarlabel" layoutX="130.0" layoutY="76.0" text="Search By State" />
-      <ScrollBar fx:id="tablescrollbar" layoutX="510.0" layoutY="135.0" orientation="VERTICAL" prefHeight="174.0" prefWidth="15.0" />
+      <ScrollBar fx:id="tablescrollbar" layoutX="552.0" layoutY="135.0" orientation="VERTICAL" prefHeight="233.0" prefWidth="15.0" />
    </children>
 </AnchorPane>

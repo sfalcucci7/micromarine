@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 
- // 9-8 this gives succes message connecting to new mysql db
+ // Initiates MySQL JDBC driver and connection to MySQL database micromarinedb 
 public class ConnectSQL {
     static String user = "mmuser";
     static String password = "N14llsqf5077!";
@@ -20,6 +20,8 @@ public class ConnectSQL {
         Class.forName(driver);
         try {
         con = DriverManager.getConnection(url, user, password);
+
+        // Exception errors if connection is unsuccessful
     } catch (SQLException e){
         throw new RuntimeException(e);
 }
