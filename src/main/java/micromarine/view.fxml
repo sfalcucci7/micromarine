@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorpaneview" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="anchorpaneview" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="433.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="micromarine.ViewController">
    <children>
       <TableView fx:id="datatable" layoutX="57.0" layoutY="108.0" prefHeight="261.0" prefWidth="495.0">
         <columns>
@@ -33,5 +33,10 @@
       <TextField fx:id="searchtext" layoutX="225.0" layoutY="72.0" promptText="(i.e. NJ)" />
       <Label fx:id="searchbarlabel" layoutX="130.0" layoutY="76.0" text="Search By State" />
       <ScrollBar fx:id="tablescrollbar" layoutX="552.0" layoutY="135.0" orientation="VERTICAL" prefHeight="233.0" prefWidth="15.0" />
+      <Button fx:id="backtosubmitbutton" layoutX="435.0" layoutY="393.0" mnemonicParsing="false" onAction="#backtosubmit" text="Go Back" textFill="#58cace">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

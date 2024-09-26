@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorpanesubmit" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="607.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="micromarine.SubmitController">
+<AnchorPane fx:id="anchorpanesubmit" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="micromarine.SubmitController">
    <children>
       <Label fx:id="welcometitlelabel" layoutX="133.0" layoutY="35.0" text="Welcome to MicroMarine!" textFill="#58cace">
          <font>
@@ -27,7 +27,7 @@
          <font>
             <Font name="Arial Black" size="12.0" />
          </font></Button>
-      <Button fx:id="viewalldatapageButton" layoutX="413.0" layoutY="177.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="105.0" text="View All Data" textFill="#fd801a">
+      <Button fx:id="viewalldatapageButton" layoutX="413.0" layoutY="177.0" mnemonicParsing="false" onAction="#openviewall" prefHeight="37.0" prefWidth="105.0" text="View All Data" textFill="#fd801a">
          <font>
             <Font name="Arial Black" size="12.0" />
          </font></Button>

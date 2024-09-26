@@ -107,7 +107,7 @@ public class SubmitController implements Initializable {
             " | State: " + usastate.getText() +
             " | Your name: " + inputname.getText() 
             );
-            submitsuccesslabel.setText( "THANKS FOR SUBMITTING YOUR DATA!");
+            submitsuccesslabel.setText("THANKS FOR SUBMITTING YOUR DATA!");
 
         }
         //General error message for unsuccessful submissions
@@ -118,7 +118,22 @@ public class SubmitController implements Initializable {
         }
 
         }
+//Tentative page navigation functionality
+@FXML
+public void openviewall() throws Exception {
+    Stage stage = (Stage) viewalldatapageButton.getScene().getWindow();
+    stage.close();
+    Stage primaryStage = new Stage();
+    Parent root = FXMLLoader.load(getClass().getResource("view.fxml"));
+    primaryStage.setTitle("View All Data");
+    primaryStage.setScene((new Scene(root, 750, 500)));
+    primaryStage.show();
+}
 
+public void start(Stage stage) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'start'");
+}
     
 
 }

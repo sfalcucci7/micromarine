@@ -25,6 +25,9 @@ stage.show();
 public static void main(String[] args) {
     launch();
 }
+// public Stage getStage() {
+//     throw new UnsupportedOperationException("Unimplemented method 'getStage'");
+// }
 }
     
 
