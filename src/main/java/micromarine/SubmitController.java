@@ -92,12 +92,12 @@ public class SubmitController implements Initializable {
         Connection con = ConnectSQL.GetCon();
         try {
             PreparedStatement st = con.prepareStatement(insert);
-            st.setString(1, inputname.getText());
-            st.setString(2, email.getText());
+            st.setString(1, inputname.getText().toUpperCase());
+            st.setString(2, email.getText().toUpperCase());
             st.setString(3, pcount.getText());
-            st.setString(4, usastate.getText());
+            st.setString(4, usastate.getText().toUpperCase());
             st.setString(5, maxsize.getText());
-            st.setString(6, season.getText());
+            st.setString(6, season.getText().toUpperCase());
             st.executeUpdate();
     //The system will print out visually a confirmation of what the user submitted and present a success message
         System.out.println(
@@ -118,15 +118,15 @@ public class SubmitController implements Initializable {
         }
 
         }
-//Tentative page navigation functionality
+//Page navigation functionality to View Data Page
 @FXML
 public void openviewall() throws Exception {
     Stage stage = (Stage) viewalldatapageButton.getScene().getWindow();
     stage.close();
     Stage primaryStage = new Stage();
     Parent root = FXMLLoader.load(getClass().getResource("view.fxml"));
-    primaryStage.setTitle("View All Data");
-    primaryStage.setScene((new Scene(root, 750, 500)));
+    primaryStage.setTitle("VIEW DATA PAGE");
+    primaryStage.setScene((new Scene(root, 700, 600)));
     primaryStage.show();
 }
 

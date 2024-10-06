@@ -8,5 +8,6 @@ module micromarine {
     requires javafx.swing;
 
     opens micromarine to javafx.fxml;
+    //opens sample.Datamodel;
     exports micromarine;
 }
