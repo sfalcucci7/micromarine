@@ -12,6 +12,7 @@ public class ConnectSQL {
     static String url = "jdbc:mysql://localhost:3306/micromarinedb";
     static String driver = "com.mysql.cj.jdbc.Driver";
 
+    //Creates method to get the connection that will be used in other modules
     public static Connection GetCon(){
     Connection con = null;
     try {

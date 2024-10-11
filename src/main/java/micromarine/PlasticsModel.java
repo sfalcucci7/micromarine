@@ -10,7 +10,7 @@ public class PlasticsModel {
    String season;
    Integer experimentID;
 
-
+//Getters and Setters established here which are then called in ViewController
 public PlasticsModel (String fullname, String email, Integer counttotal, String usastate, Double size, String season, Integer experimentID){
 this.fullname = fullname;
 this.email = email;
