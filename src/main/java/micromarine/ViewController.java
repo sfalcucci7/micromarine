@@ -99,7 +99,7 @@ try {
     rs = st.executeQuery();
 
     while (rs.next()) {
-
+        //Align to getters in PlasticsModel.java
     String fullname = rs.getString("FullName");
     String email = rs.getString("Email");
     Integer counttotal = rs.getInt("CountTotal");
@@ -107,11 +107,11 @@ try {
     Double size = rs.getDouble("MaxSize");
     String season = rs.getString("Season");
     Integer experimentID = rs.getInt("ExperimentID");
-    System.out.println("success get");
+    System.out.println("Backend Confirmation: Successful Get");
 
 plasticsModelObservableList.add(new PlasticsModel(fullname, email, counttotal, state, size, season, experimentID));
 }
-//Data should now be shown in data table
+//Data should now be shown in the data table with the correct data type, table column, and database column 
 NameTableColumn.setCellValueFactory(new PropertyValueFactory<PlasticsModel, String>("fullname"));
 EmailTableColumn.setCellValueFactory(new PropertyValueFactory<PlasticsModel, String>("email"));
 CountTableColumn.setCellValueFactory(new PropertyValueFactory<PlasticsModel, Integer>("counttotal"));
@@ -123,27 +123,27 @@ IDTableColumn.setCellValueFactory(new PropertyValueFactory<PlasticsModel, Intege
 datatable.setItems(plasticsModelObservableList);
 
 
-//Testing potential search functionality
-FilteredList<PlasticsModel> filteredData = new FilteredList<>(plasticsModelObservableList, b -> true);
+// //Testing potential search functionality (does not work yet)
+// FilteredList<PlasticsModel> filteredData = new FilteredList<>(plasticsModelObservableList, b -> true);
 
-searchtext.textProperty().addListener((observable, oldValue, newValue) -> {
+// searchtext.textProperty().addListener((observable, oldValue, newValue) -> {
 
-    filteredData.setPredicate(PlasticsModel -> {
+//     filteredData.setPredicate(PlasticsModel -> {
 
-if (newValue.isEmpty() || newValue.isBlank () || newValue == null) {
-    return true; }
-String searchstate = newValue.toUpperCase();
+// if (newValue.isEmpty() || newValue.isBlank () || newValue == null) {
+//     return true; }
+// String searchstate = newValue.toUpperCase();
 
-if (PlasticsModel.getUsastate().toUpperCase().indexOf(searchstate) > -1){
-    return true; //means a match was found in state
-} else 
- return false; });
-});
+// if (PlasticsModel.getUsastate().toUpperCase().indexOf(searchstate) > -1){
+//     return true; //means a match was found in state
+// } else 
+//  return false; });
+// });
 
-//Sorts the table only to the searched state live
-SortedList<PlasticsModel> sortedData = new SortedList <>(filteredData);
-sortedData.comparatorProperty().bind(datatable.comparatorProperty());
-datatable.setItems(sortedData);
+// // Then sorts the table only to the searched state live (does not work yet)
+// SortedList<PlasticsModel> sortedData = new SortedList <>(filteredData);
+// sortedData.comparatorProperty().bind(datatable.comparatorProperty());
+// datatable.setItems(sortedData);
 
 
 
@@ -155,13 +155,13 @@ datatable.setItems(sortedData);
 
 //Page navigation functionality back to Submit page
 public void backtosubmit() throws Exception {
-Stage stage = (Stage) backtosubmitbutton.getScene().getWindow();
-stage.close();
-Stage primaryStage = new Stage();
-Parent root = FXMLLoader.load(getClass().getResource("submit.fxml"));
-primaryStage.setTitle("SUBMIT DATA PAGE");
-primaryStage.setScene((new Scene(root, 600, 650)));
-primaryStage.show();
+    Stage stage = (Stage) backtosubmitbutton.getScene().getWindow();
+    stage.close();
+    Stage primaryStage = new Stage();
+    Parent root = FXMLLoader.load(getClass().getResource("submit.fxml"));
+    primaryStage.setTitle("SUBMIT DATA PAGE");
+    primaryStage.setScene((new Scene(root, 600, 650)));
+    primaryStage.show();
 
 
     

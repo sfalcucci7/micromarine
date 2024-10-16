@@ -8,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -91,6 +90,7 @@ public class SubmitController implements Initializable {
         String insert = "insert into micromarinedb.plastics(FullName, Email, CountTotal, USAState, MaxSize, Season) values(?,?,?,?,?,?)";
         Connection con = ConnectSQL.GetCon();
         try {
+            // Updated strings to submit data as all upper case to handle varying user inputs
             PreparedStatement st = con.prepareStatement(insert);
             st.setString(1, inputname.getText().toUpperCase());
             st.setString(2, email.getText().toUpperCase());
@@ -99,6 +99,7 @@ public class SubmitController implements Initializable {
             st.setString(5, maxsize.getText());
             st.setString(6, season.getText().toUpperCase());
             st.executeUpdate();
+            
     //The system will print out visually a confirmation of what the user submitted and present a success message
         System.out.println(
             "Plastics you counted: " + pcount.getText() +
