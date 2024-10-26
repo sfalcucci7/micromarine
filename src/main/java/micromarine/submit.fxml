@@ -19,7 +19,7 @@
       <TextField fx:id="email" layoutX="202.0" layoutY="138.0" prefHeight="25.0" prefWidth="182.0" />
       <Label fx:id="pcountlabel" layoutX="117.0" layoutY="179.0" text="Plastics Count:" />
       <TextField fx:id="pcount" layoutX="202.0" layoutY="175.0" prefHeight="25.0" prefWidth="182.0" />
-      <Label fx:id="maxsizelabel" layoutX="143.0" layoutY="211.0" text="Max Size:" />
+      <Label fx:id="maxsizelabel" layoutX="115.0" layoutY="211.0" text="Max Size (mm):" />
       <TextField fx:id="maxsize" layoutX="202.0" layoutY="207.0" prefHeight="25.0" prefWidth="182.0" />
       <Label fx:id="seasonlabel" layoutX="147.0" layoutY="248.0" text="Season:" />
       <TextField fx:id="season" layoutX="202.0" layoutY="244.0" prefHeight="25.0" prefWidth="182.0" promptText="Spring/Summer/Fall/Winter" />
@@ -29,13 +29,13 @@
          <font>
             <Font name="Arial Black" size="12.0" />
          </font></Button>
-      <Button fx:id="viewalldatapageButton" layoutX="413.0" layoutY="177.0" mnemonicParsing="false" onAction="#openviewall" prefHeight="37.0" prefWidth="105.0" text="View All Data" textFill="#fd801a">
+      <Button fx:id="viewalldatapageButton" layoutX="413.0" layoutY="177.0" mnemonicParsing="false" onAction="#openviewall" prefHeight="37.0" prefWidth="105.0" text="View Data" textFill="#fd801a">
          <font>
             <Font name="Arial Black" size="12.0" />
          </font></Button>
-      <Label fx:id="submitsuccesslabel" layoutX="75.0" layoutY="352.0" prefHeight="177.0" prefWidth="461.0" wrapText="true">
+      <Label fx:id="submitsuccesslabel" layoutX="75.0" layoutY="352.0" prefHeight="177.0" prefWidth="461.0" textFill="#d70000" wrapText="true">
          <font>
-            <Font name="Arial Bold Italic" size="12.0" />
+            <Font name="NSimSun" size="12.0" />
          </font></Label>
    </children>
 </AnchorPane>

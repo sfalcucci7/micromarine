@@ -6,6 +6,9 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -89,6 +92,50 @@ public class SubmitController implements Initializable {
     void submitData(ActionEvent event) {
         String insert = "insert into micromarinedb.plastics(FullName, Email, CountTotal, USAState, MaxSize, Season) values(?,?,?,?,?,?)";
         Connection con = ConnectSQL.GetCon();
+
+   // Validate inputs (IN PROGRESS)
+   String fullName = inputname.getText().toUpperCase();
+   String emailInput = email.getText().toUpperCase();
+   String countTotal = pcount.getText();
+   String usaState = usastate.getText().toUpperCase();
+   String maxSize = maxsize.getText();
+   String seasonInput = season.getText().toUpperCase();
+
+   List<String> errorMessages = new ArrayList<>();
+   List<String> validStates = Arrays.asList("AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY");
+
+    if (fullName.isEmpty() || emailInput.isEmpty() || countTotal.isEmpty() || usaState.isEmpty() || maxSize.isEmpty() || seasonInput.isEmpty()) {
+        errorMessages.add("All fields are required.");
+    }
+
+    if (!validStates.contains(usaState)) {
+        errorMessages.add("State must be a valid two-letter acronym for a US state.");
+    }
+
+    if (!seasonInput.equals("SPRING") && !seasonInput.equals("SUMMER") && !seasonInput.equals("WINTER") && !seasonInput.equals("FALL")) {
+        errorMessages.add("Season must be submitted as Spring, Summer, Winter, or Fall.");
+    }
+
+    try {
+        int count = Integer.parseInt(countTotal);
+    } catch (NumberFormatException e) {
+        errorMessages.add("Plastics count must be a number.");
+    }
+
+    try {
+        double size = Double.parseDouble(maxSize);
+        if (size > 5) {
+            errorMessages.add("A microplastic should be less than or equal to 5mm.");
+        }
+    } catch (NumberFormatException e) {
+        errorMessages.add("Max size must be a number.");
+    }
+
+
+    if (!errorMessages.isEmpty()) {
+        submitsuccesslabel.setText(String.join("\n", errorMessages));
+        return;
+    }
         try {
             // Updated strings to submit data as all upper case to handle varying user inputs
             PreparedStatement st = con.prepareStatement(insert);
@@ -100,7 +147,7 @@ public class SubmitController implements Initializable {
             st.setString(6, season.getText().toUpperCase());
             st.executeUpdate();
             
-    //The system will print out visually a confirmation of what the user submitted and present a success message
+    //The system will print out visually a confirmation of what the user submitted and present a success message. This can be removed at the end of project.
         System.out.println(
             "Plastics you counted: " + pcount.getText() +
             " | Max size: " + maxsize.getText() +
@@ -114,7 +161,7 @@ public class SubmitController implements Initializable {
         //General error message for unsuccessful submissions
         catch (SQLException e){
             System.out.println("Error - could not submit.");
-            submitsuccesslabel.setText("Sorry, your data submission was unsuccessful. Make sure your state is the two-letter acronym and your plastics count is only a number. All fields are required.");
+            submitsuccesslabel.setText("Sorry, there was an error and your data submission was unsuccessful. Please try again.");
             throw new RuntimeException(e);
         }
 

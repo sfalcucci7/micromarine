@@ -33,6 +33,10 @@ PreparedStatement st = null;
 ResultSet rs = null;
 PreparedStatement st2 = null;
 ResultSet rs2 = null;
+PreparedStatement st3 = null;
+ResultSet rs3 = null;
+PreparedStatement st4 = null;
+ResultSet rs4 = null;
 PlasticsModel plasticsModel = null;
 
 //Establishing all objects on the JavaFX page for view data
@@ -84,6 +88,9 @@ private Label statequerylabel;
 @FXML
 private Label totalquerylabel;
 
+@FXML
+    private Label sizequerylabel;
+
 
 //Creating observable list referencing PlasticsModel.java
 ObservableList<PlasticsModel> plasticsModelObservableList = FXCollections.observableArrayList();
@@ -91,8 +98,9 @@ ObservableList<PlasticsModel> plasticsModelObservableList = FXCollections.observ
 //Establishing database connection again, getting variables, and setting them into the cell values of the table
 @Override
 public void initialize(URL url, ResourceBundle resourceBundle) {
-    String query = "SELECT FullName, Email, CountTotal, USAState, MaxSize, Season, ExperimentID FROM micromarinedb.plastics";
+String query = "SELECT FullName, Email, CountTotal, USAState, MaxSize, Season, ExperimentID FROM micromarinedb.plastics";
 con = ConnectSQL.GetCon();
+
 
 try {
     st = con.prepareStatement(query);
@@ -107,7 +115,7 @@ try {
     Double size = rs.getDouble("MaxSize");
     String season = rs.getString("Season");
     Integer experimentID = rs.getInt("ExperimentID");
-    System.out.println("Backend Confirmation: Successful Get");
+    // System.out.println("Backend Confirmation: Successful Get");
 
 plasticsModelObservableList.add(new PlasticsModel(fullname, email, counttotal, state, size, season, experimentID));
 }
@@ -123,33 +131,68 @@ IDTableColumn.setCellValueFactory(new PropertyValueFactory<PlasticsModel, Intege
 datatable.setItems(plasticsModelObservableList);
 
 
-// //Testing potential search functionality (does not work yet)
+// //Search functionality testing (PENDING PROFESSOR APPROVAL)
+
+// //wrap plasticsModelObervableList used to display the table in a FilteredList to iitially display all data
 // FilteredList<PlasticsModel> filteredData = new FilteredList<>(plasticsModelObservableList, b -> true);
 
-// searchtext.textProperty().addListener((observable, oldValue, newValue) -> {
-
+// //set the filter Predicate whenever the filter changes/the user starts typing
+//     searchtext.textProperty().addListener((observable, oldValue, newValue) -> {
 //     filteredData.setPredicate(PlasticsModel -> {
 
 // if (newValue.isEmpty() || newValue.isBlank () || newValue == null) {
-//     return true; }
+//     return true; } // if search bar is empty show all data rows
 // String searchstate = newValue.toUpperCase();
 
 // if (PlasticsModel.getUsastate().toUpperCase().indexOf(searchstate) > -1){
-//     return true; //means a match was found in state
+//     return true; //means a match was found in state and it is filtered to it
 // } else 
 //  return false; });
 // });
 
-// // Then sorts the table only to the searched state live (does not work yet)
-// SortedList<PlasticsModel> sortedData = new SortedList <>(filteredData);
-// sortedData.comparatorProperty().bind(datatable.comparatorProperty());
-// datatable.setItems(sortedData);
+// // Then sorts the table only to the searched state live
+// SortedList<PlasticsModel> sortedData = new SortedList <>(filteredData); //wrap the FilteredList in a SortedList
+// sortedData.comparatorProperty().bind(datatable.comparatorProperty()); //bind the SortedList comparator to the table
+// datatable.setItems(sortedData); //add sorted and filtered data to the table 
 
 
+//Calculates and shows the state with the most plastics recorded statistic
+String querystate = "SELECT USAState, SUM(CountTotal) AS TotalCount FROM micromarinedb.plastics GROUP BY USAState ORDER BY TotalCount DESC LIMIT 1;";
+st2 = con.prepareStatement(querystate);
+rs2 = st2.executeQuery();
+
+//Calculates and shows the sum of all plastics recorded
+String querycount = "SELECT SUM(CountTotal) AS TotalPlasticsCount FROM micromarinedb.PLASTICS";
+st3 = con.prepareStatement(querycount);
+rs3 = st3.executeQuery();
+
+//Calculates the average microplastic size
+String querysize = "SELECT AVG(MaxSize) AS AverageMaxSize FROM micromarinedb.PLASTICS";
+st4 = con.prepareStatement(querysize);
+rs4 = st4.executeQuery();
+
+if (rs2.next()) { //state statistic display
+    String querystateresult = rs2.getString("USAState");
+    // System.out.println("State Result: " +querystateresult);
+    statequerylabel.setText(querystateresult);
+}
+
+
+if (rs3.next()) { //total count statistic display
+    String querycountresult = rs3.getString("TotalPlasticsCount");
+    // System.out.println("Count Result: " +querycountresult);
+    totalquerylabel.setText(querycountresult);
+}
+
+if (rs4.next()) { //average size display
+    String querysizeresult = rs4.getString("AverageMaxSize");
+    // System.out.println("Size Avg Result: " +querysizeresult);
+    sizequerylabel.setText(querysizeresult);
+}
 
 //SQL error catching
 } catch (SQLException e) {
-    throw new RuntimeException(e);
+    throw new RuntimeException(e);   
 }}
 
 
@@ -163,17 +206,6 @@ public void backtosubmit() throws Exception {
     primaryStage.setScene((new Scene(root, 600, 650)));
     primaryStage.show();
 
-
-    
-
-
-// //Statistics testing
-// String querystate = "SELECT USAState, COUNT(*) AS StateCount FROM micromarinedb.plastics GROUP BY USAState ORDER BY StateCount DESC LIMIT 1";
-// st2 = con.prepareStatement(querystate);
-// rs2 = st2.executeQuery();
-// String querystateresult = rs2.getString("USAState");
-// System.out.println(querystateresult);
-// statequerylabel.setText(querystateresult);
 
 }
 }
