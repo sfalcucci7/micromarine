@@ -131,7 +131,7 @@ public class SubmitController implements Initializable {
         errorMessages.add("Max size must be a number.");
     }
 
-
+//compile all error messages into one message for the user
     if (!errorMessages.isEmpty()) {
         submitsuccesslabel.setText(String.join("\n", errorMessages));
         return;

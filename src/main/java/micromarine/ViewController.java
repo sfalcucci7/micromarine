@@ -1,3 +1,5 @@
+////// [[[THIS IS A CORE IMPORTANT FILE]]]
+
 package micromarine;
 
 import java.net.URL;
@@ -91,6 +93,7 @@ private Label totalquerylabel;
 @FXML
     private Label sizequerylabel;
 
+//Loading table to view all data
 
 //Creating observable list referencing PlasticsModel.java
 ObservableList<PlasticsModel> plasticsModelObservableList = FXCollections.observableArrayList();
@@ -131,30 +134,32 @@ IDTableColumn.setCellValueFactory(new PropertyValueFactory<PlasticsModel, Intege
 datatable.setItems(plasticsModelObservableList);
 
 
-// //Search functionality testing (PENDING PROFESSOR APPROVAL)
+//Search functionality testing - Significant Algorithmic Component
 
-// //wrap plasticsModelObervableList used to display the table in a FilteredList to iitially display all data
-// FilteredList<PlasticsModel> filteredData = new FilteredList<>(plasticsModelObservableList, b -> true);
+//wrap plasticsModelObervableList used to display the table in a FilteredList to iitially display all data
+FilteredList<PlasticsModel> filteredData = new FilteredList<>(plasticsModelObservableList, b -> true);
 
-// //set the filter Predicate whenever the filter changes/the user starts typing
-//     searchtext.textProperty().addListener((observable, oldValue, newValue) -> {
-//     filteredData.setPredicate(PlasticsModel -> {
+//set the filter Predicate whenever the filter changes/the user starts typing
+    searchtext.textProperty().addListener((observable, oldValue, newValue) -> {
+    filteredData.setPredicate(PlasticsModel -> {
 
-// if (newValue.isEmpty() || newValue.isBlank () || newValue == null) {
-//     return true; } // if search bar is empty show all data rows
-// String searchstate = newValue.toUpperCase();
+if (newValue.isEmpty() || newValue.isBlank () || newValue == null) {
+    return true; } // if search bar is empty show all data rows
+String searchstate = newValue.toUpperCase();
 
-// if (PlasticsModel.getUsastate().toUpperCase().indexOf(searchstate) > -1){
-//     return true; //means a match was found in state and it is filtered to it
-// } else 
-//  return false; });
-// });
+if (PlasticsModel.getUsastate().toUpperCase().indexOf(searchstate) > -1){
+    return true; //means a match was found in state and it is filtered to it
+} else 
+ return false; });
+});
 
-// // Then sorts the table only to the searched state live
-// SortedList<PlasticsModel> sortedData = new SortedList <>(filteredData); //wrap the FilteredList in a SortedList
-// sortedData.comparatorProperty().bind(datatable.comparatorProperty()); //bind the SortedList comparator to the table
-// datatable.setItems(sortedData); //add sorted and filtered data to the table 
+// Then sorts the table only to the searched state live
+SortedList<PlasticsModel> sortedData = new SortedList <>(filteredData); //wrap the FilteredList in a SortedList
+sortedData.comparatorProperty().bind(datatable.comparatorProperty()); //bind the SortedList comparator to the table
+datatable.setItems(sortedData); //add sorted and filtered data to the table 
 
+
+//Statistics functionality 
 
 //Calculates and shows the state with the most plastics recorded statistic
 String querystate = "SELECT USAState, SUM(CountTotal) AS TotalCount FROM micromarinedb.plastics GROUP BY USAState ORDER BY TotalCount DESC LIMIT 1;";
@@ -167,7 +172,7 @@ st3 = con.prepareStatement(querycount);
 rs3 = st3.executeQuery();
 
 //Calculates the average microplastic size
-String querysize = "SELECT AVG(MaxSize) AS AverageMaxSize FROM micromarinedb.PLASTICS";
+String querysize = "SELECT ROUND(AVG(MaxSize), 3) AS AverageMaxSize FROM micromarinedb.PLASTICS";
 st4 = con.prepareStatement(querysize);
 rs4 = st4.executeQuery();
 

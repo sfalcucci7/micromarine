@@ -1,3 +1,5 @@
+////// [[[THIS IS A CORE IMPORTANT FILE]]]
+
 package micromarine;
 
 //This model class references and generates the setters and getters for each data input field that is populated in the View Page table
