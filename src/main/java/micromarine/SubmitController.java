@@ -93,7 +93,7 @@ public class SubmitController implements Initializable {
         String insert = "insert into micromarinedb.plastics(FullName, Email, CountTotal, USAState, MaxSize, Season) values(?,?,?,?,?,?)";
         Connection con = ConnectSQL.GetCon();
 
-   // Validate inputs (IN PROGRESS)
+   // Validate inputs 
    String fullName = inputname.getText().toUpperCase();
    String emailInput = email.getText().toUpperCase();
    String countTotal = pcount.getText();
@@ -101,27 +101,31 @@ public class SubmitController implements Initializable {
    String maxSize = maxsize.getText();
    String seasonInput = season.getText().toUpperCase();
 
+   //set strings for fully compiled error message and state acronymn check
    List<String> errorMessages = new ArrayList<>();
    List<String> validStates = Arrays.asList("AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY");
 
+        //validate that all the text boxes have an input because all are required fields
     if (fullName.isEmpty() || emailInput.isEmpty() || countTotal.isEmpty() || usaState.isEmpty() || maxSize.isEmpty() || seasonInput.isEmpty()) {
         errorMessages.add("All fields are required.");
     }
 
+    //validate state is the acronymn and not fully spelled out
     if (!validStates.contains(usaState)) {
         errorMessages.add("State must be a valid two-letter acronym for a US state.");
     }
-
+    //validate the season is only submitted as the four appropriate options
     if (!seasonInput.equals("SPRING") && !seasonInput.equals("SUMMER") && !seasonInput.equals("WINTER") && !seasonInput.equals("FALL")) {
         errorMessages.add("Season must be submitted as Spring, Summer, Winter, or Fall.");
     }
 
+    //valididate the plastics count field is a number and doesn't include other characters 
     try {
         int count = Integer.parseInt(countTotal);
     } catch (NumberFormatException e) {
         errorMessages.add("Plastics count must be a number.");
     }
-
+//validate the size field is a number and less than 5mm following microplastic definitions
     try {
         double size = Double.parseDouble(maxSize);
         if (size > 5) {
@@ -131,7 +135,7 @@ public class SubmitController implements Initializable {
         errorMessages.add("Max size must be a number.");
     }
 
-//compile all error messages into one message for the user
+//compile all error messages into one message for the user to see
     if (!errorMessages.isEmpty()) {
         submitsuccesslabel.setText(String.join("\n", errorMessages));
         return;
@@ -158,7 +162,7 @@ public class SubmitController implements Initializable {
             submitsuccesslabel.setText("THANKS FOR SUBMITTING YOUR DATA!");
 
         }
-        //General error message for unsuccessful submissions
+        //General error message catch for unsuccessful submissions
         catch (SQLException e){
             System.out.println("Error - could not submit.");
             submitsuccesslabel.setText("Sorry, there was an error and your data submission was unsuccessful. Please try again.");
@@ -166,6 +170,7 @@ public class SubmitController implements Initializable {
         }
 
         }
+        
 //Page navigation functionality to View Data Page
 @FXML
 public void openviewall() throws Exception {
