@@ -17,7 +17,7 @@ public class MainApp extends Application {
     public void start(Stage stage) throws IOException {
 Parent root = FXMLLoader.load(getClass().getResource("submit.fxml"));
 Scene scene = new Scene(root);
-stage.setTitle("WELCOME - SUBMIT DATA PAGE");
+stage.setTitle("SUBMIT DATA PAGE");
 stage.setScene(scene);
 stage.show();
 

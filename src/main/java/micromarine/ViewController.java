@@ -2,11 +2,15 @@
 
 package micromarine;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -27,6 +31,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.TableColumn;
 import javafx.stage.Stage;
+
+import javafx.stage.FileChooser;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 
 public class ViewController implements Initializable {
 //Variables later referenced in Itialize to populate observable list
@@ -91,7 +101,16 @@ private Label statequerylabel;
 private Label totalquerylabel;
 
 @FXML
-    private Label sizequerylabel;
+private Label sizequerylabel;
+  
+@FXML
+private Button exportbutton;
+
+@FXML
+private void exportaction(ActionEvent event) {
+    exporttabletocsv();
+}
+
 
 //Loading table to view all data
 
@@ -210,7 +229,54 @@ public void backtosubmit() throws Exception {
     primaryStage.setTitle("SUBMIT DATA PAGE");
     primaryStage.setScene((new Scene(root, 600, 650)));
     primaryStage.show();
+}
+
+//Export data to CSV button action functionality
+private void exporttabletocsv() {
+    // Get the current date and time for the file name
+    LocalDateTime now = LocalDateTime.now();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
+    String timestamp = now.format(formatter);
+    
+    // Create the FileChooser and set the file name 
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Save CSV File");
+    fileChooser.setInitialFileName("data_" + timestamp + ".csv");
+    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
+    File file = fileChooser.showSaveDialog(exportbutton.getScene().getWindow());
+
+    if (file != null) {
+        try (FileWriter csvWriter = new FileWriter(file)) {
+            // Write header
+            csvWriter.append("FullName,Email,CountTotal,USAState,MaxSize,Season,ExperimentID");
+            csvWriter.append("\n");
+
+            // Write rows from the data table, including customized search results
+            for (PlasticsModel plasticsModel : datatable.getItems()) {
+                csvWriter.append(plasticsModel.getFullname()).append(",");
+                csvWriter.append(plasticsModel.getEmail()).append(",");
+                csvWriter.append(String.valueOf(plasticsModel.getCounttotal())).append(",");
+                csvWriter.append(plasticsModel.getUsastate()).append(",");
+                csvWriter.append(String.valueOf(plasticsModel.getSize())).append(",");
+                csvWriter.append(plasticsModel.getSeason()).append(",");
+                csvWriter.append(String.valueOf(plasticsModel.getExperimentID()));
+                csvWriter.append("\n");
+            }
+
+            csvWriter.flush();
+
+            // Show success message on console for internal validation
+            System.out.println("Export successful!");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
 
 
+
+
+    
 }
-}
+

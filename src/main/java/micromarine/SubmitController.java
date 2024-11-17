@@ -141,7 +141,7 @@ public class SubmitController implements Initializable {
         return;
     }
         try {
-            // Updated strings to submit data as all upper case to handle varying user inputs
+            // Submit data as all upper case to handle varying user inputs
             PreparedStatement st = con.prepareStatement(insert);
             st.setString(1, inputname.getText().toUpperCase());
             st.setString(2, email.getText().toUpperCase());
@@ -151,7 +151,7 @@ public class SubmitController implements Initializable {
             st.setString(6, season.getText().toUpperCase());
             st.executeUpdate();
             
-    //The system will print out visually a confirmation of what the user submitted and present a success message. This can be removed at the end of project.
+    //The system will print out on sonsole a confirmation of what the user submitted and present a success message. This can be removed at the end of project.
         System.out.println(
             "Plastics you counted: " + pcount.getText() +
             " | Max size: " + maxsize.getText() +
