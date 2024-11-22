@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -12,30 +13,56 @@
          <font>
             <Font name="Arial Black" size="24.0" />
          </font>
+         <tooltip>
+            <Tooltip text="Welcome and thank you for participating in our research! &#10;&#10;Instructions: &#10;&#10;On the Submit Data page, fill out the form to submit your experiment results. &#10;Then go to the View Data page to see, search, and analyze all the data we have.&#10;&#10;You are making a difference for our local marine ecosystems. Thank you and come back with more valuable data soon!" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Tooltip>
+         </tooltip>
       </Label>
       <Label fx:id="inputnamelabel" layoutX="79.0" layoutY="106.0" text="First and Last Name:" />
       <TextField fx:id="inputname" layoutX="202.0" layoutY="102.0" prefHeight="25.0" prefWidth="182.0" />
       <Label fx:id="emaillabel" layoutX="152.0" layoutY="142.0" text="Email:" />
       <TextField fx:id="email" layoutX="202.0" layoutY="138.0" prefHeight="25.0" prefWidth="182.0" />
       <Label fx:id="pcountlabel" layoutX="117.0" layoutY="179.0" text="Plastics Count:" />
-      <TextField fx:id="pcount" layoutX="202.0" layoutY="175.0" prefHeight="25.0" prefWidth="182.0" />
+      <TextField fx:id="pcount" layoutX="202.0" layoutY="175.0" prefHeight="25.0" prefWidth="182.0">
+         <tooltip>
+            <Tooltip text="This field must only include numbers" />
+         </tooltip></TextField>
       <Label fx:id="maxsizelabel" layoutX="115.0" layoutY="211.0" text="Max Size (mm):" />
-      <TextField fx:id="maxsize" layoutX="202.0" layoutY="207.0" prefHeight="25.0" prefWidth="182.0" />
+      <TextField fx:id="maxsize" layoutX="202.0" layoutY="207.0" prefHeight="25.0" prefWidth="182.0">
+         <tooltip>
+            <Tooltip text="Remember that microplastics are considered to be 5mm or less!" />
+         </tooltip></TextField>
       <Label fx:id="seasonlabel" layoutX="147.0" layoutY="248.0" text="Season:" />
-      <TextField fx:id="season" layoutX="202.0" layoutY="244.0" prefHeight="25.0" prefWidth="182.0" promptText="Spring/Summer/Fall/Winter" />
+      <TextField fx:id="season" layoutX="202.0" layoutY="244.0" prefHeight="25.0" prefWidth="182.0" promptText="Spring/Summer/Fall/Winter">
+         <tooltip>
+            <Tooltip text="Acceptable inputs are spring, summer, fall, or winter" />
+         </tooltip></TextField>
       <Label fx:id="usastatelabel" layoutX="153.0" layoutY="287.0" text="State:" />
-      <TextField fx:id="usastate" layoutX="202.0" layoutY="283.0" prefHeight="25.0" prefWidth="182.0" promptText="(i.e. NJ)" />
+      <TextField fx:id="usastate" layoutX="202.0" layoutY="283.0" prefHeight="25.0" prefWidth="182.0" promptText="(i.e. NJ)">
+         <tooltip>
+            <Tooltip text="Please only use the state acronym" />
+         </tooltip></TextField>
       <Button fx:id="submitdatabutton" layoutX="213.0" layoutY="326.0" mnemonicParsing="false" onAction="#submitData" prefHeight="25.0" prefWidth="127.0" text="Submit Data" textFill="#f00eac">
          <font>
             <Font name="Arial Black" size="12.0" />
-         </font></Button>
+         </font>
+         <tooltip>
+            <Tooltip id="submitbuttontip" text="Click here to submit your findings to our database!" wrapText="true" />
+         </tooltip></Button>
       <Button fx:id="viewalldatapageButton" layoutX="413.0" layoutY="177.0" mnemonicParsing="false" onAction="#openviewall" prefHeight="37.0" prefWidth="105.0" text="View Data" textFill="#fd801a">
          <font>
             <Font name="Arial Black" size="12.0" />
-         </font></Button>
-      <Label fx:id="submitsuccesslabel" layoutX="75.0" layoutY="352.0" prefHeight="177.0" prefWidth="461.0" textFill="#d70000" wrapText="true">
+         </font>
+         <tooltip>
+            <Tooltip text="Click here to see and search our data!" />
+         </tooltip></Button>
+      <Label id="submitsuccesslabel" fx:id="submitsuccesslabel" layoutX="101.0" layoutY="367.0" prefHeight="157.0" prefWidth="384.0" text="    " textAlignment="CENTER" textFill="#d70000" wrapText="true">
          <font>
-            <Font name="NSimSun" size="12.0" />
-         </font></Label>
+            <Font name="NSimSun" size="11.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

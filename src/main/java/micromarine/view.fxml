@@ -5,6 +5,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -21,28 +22,56 @@
             <TableColumn fx:id="IDTableColumn" prefWidth="61.3333740234375" text="ID" />
         </columns>
       </TableView>
-      <TextField fx:id="searchtext" layoutX="309.0" layoutY="72.0" prefHeight="25.0" prefWidth="82.0" promptText="(i.e. NJ)" />
+      <TextField fx:id="searchtext" layoutX="309.0" layoutY="72.0" prefHeight="25.0" prefWidth="82.0" promptText="(i.e. NJ)">
+         <tooltip>
+            <Tooltip text="By entering a state acronym here, you can filter the table to only those results" wrapText="true" />
+         </tooltip></TextField>
       <Label fx:id="viewtitlelabel" layoutX="197.0" layoutY="20.0" text="View MicroMarine Data" textFill="#fd801a">
          <font>
             <Font name="Arial Black" size="24.0" />
          </font>
+         <tooltip>
+            <Tooltip text="You're on the View Data page where you can view, search, and export the data">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Tooltip>
+         </tooltip>
       </Label>
       <Label fx:id="searchbarlabel" layoutX="211.0" layoutY="76.0" text="Search By State" />
-      <Button fx:id="backtosubmitbutton" layoutX="512.0" layoutY="552.0" mnemonicParsing="false" onAction="#backtosubmit" text="Back To Submit" textFill="#4ecace">
+      <Button fx:id="backtosubmitbutton" layoutX="512.0" layoutY="552.0" mnemonicParsing="false" onAction="#backtosubmit" text="Back To Submit" textFill="#3cced0fc">
          <font>
             <Font name="Arial Black" size="12.0" />
          </font>
+         <tooltip>
+            <Tooltip text="Ready to submit more data? Click here!" />
+         </tooltip>
       </Button>
       <Label layoutX="48.0" layoutY="470.0" text="State with the most recorded plastics:" />
       <Label fx:id="statequerylabel" layoutX="251.0" layoutY="470.0" text="---" />
-      <Label layoutX="325.0" layoutY="398.0" prefHeight="29.0" prefWidth="50.0" text="-------">
+      <Label layoutX="266.0" layoutY="390.0" prefHeight="29.0" prefWidth="168.0" text="Data Summary" textFill="#1c75fc">
          <font>
             <Font name="Arial Black" size="20.0" />
          </font>
+         <tooltip>
+            <Tooltip text="We've displayed the results of some key queries so that you don't have to calculate them - what a time saver!">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Tooltip>
+         </tooltip>
       </Label>
       <Label layoutX="48.0" layoutY="439.0" text="Total microplastics recorded:" />
       <Label fx:id="totalquerylabel" layoutX="206.0" layoutY="439.0" text="--" />
       <Label layoutX="48.0" layoutY="501.0" text="Average max microplastic size:" />
       <Label fx:id="sizequerylabel" layoutX="216.0" layoutY="501.0" text="----" />
+      <Button fx:id="exportbutton" layoutX="545.0" layoutY="435.0" mnemonicParsing="false" onAction="#exportaction" text="Export">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Click here to export the above data table to a CSV file!" />
+         </tooltip>
+      </Button>
    </children>
 </AnchorPane>

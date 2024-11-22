@@ -151,15 +151,10 @@ public class SubmitController implements Initializable {
             st.setString(6, season.getText().toUpperCase());
             st.executeUpdate();
             
-    //The system will print out on sonsole a confirmation of what the user submitted and present a success message. This can be removed at the end of project.
-        System.out.println(
-            "Plastics you counted: " + pcount.getText() +
-            " | Max size: " + maxsize.getText() +
-            " | Season: " + season.getText() +
-            " | State: " + usastate.getText() +
-            " | Your name: " + inputname.getText() 
-            );
-            submitsuccesslabel.setText("THANKS FOR SUBMITTING YOUR DATA!");
+ 
+
+//Success message on page for user
+    submitsuccesslabel.setText("THANKS FOR SUBMITTING YOUR DATA!");
 
         }
         //General error message catch for unsuccessful submissions
