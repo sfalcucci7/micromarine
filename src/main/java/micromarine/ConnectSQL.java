@@ -1,5 +1,3 @@
-////// [[[THIS IS A CORE IMPORTANT FILE]]]
-
 package micromarine;
 import java.sql.Connection;
 import java.sql.DriverManager;

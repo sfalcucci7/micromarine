@@ -1,5 +1,3 @@
-////// [[[THIS IS A CORE IMPORTANT FILE]]]
-
 package micromarine;
 
 import java.net.URL;
@@ -12,24 +10,20 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.fxml.Initializable;
-import java.io.IOException;
 
 
 public class SubmitController implements Initializable {
-    //Establishing all objects on the JavaFX page for submit
+    //Establishing all objects on the JavaFX page on the submit data page
     @FXML
     private AnchorPane anchorpanesubmit;
 
@@ -84,7 +78,6 @@ public class SubmitController implements Initializable {
     
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        // throw new UnsupportedOperationException("Unimplemented method 'initialize'");
     }
    
 //Main method which takes the strings inserted into the text boxes with a SQL Insert statement to insert them into the appropriate database columns
@@ -154,7 +147,7 @@ public class SubmitController implements Initializable {
  
 
 //Success message on page for user
-    submitsuccesslabel.setText("THANKS FOR SUBMITTING YOUR DATA!");
+    submitsuccesslabel.setText("Thanks for submitting your data!");
 
         }
         //General error message catch for unsuccessful submissions
@@ -173,7 +166,7 @@ public void openviewall() throws Exception {
     stage.close();
     Stage primaryStage = new Stage();
     Parent root = FXMLLoader.load(getClass().getResource("view.fxml"));
-    primaryStage.setTitle("VIEW DATA PAGE");
+    primaryStage.setTitle("View Data Page");
     primaryStage.setScene((new Scene(root, 700, 600)));
     primaryStage.show();
 }

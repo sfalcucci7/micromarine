@@ -1,5 +1,3 @@
-////// [[[THIS IS A CORE IMPORTANT FILE]]]
-
 package micromarine;
 
 import java.io.FileWriter;
@@ -34,9 +32,6 @@ import javafx.stage.Stage;
 
 import javafx.stage.FileChooser;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
 
 public class ViewController implements Initializable {
 //Variables later referenced in Itialize to populate observable list
@@ -51,7 +46,7 @@ PreparedStatement st4 = null;
 ResultSet rs4 = null;
 PlasticsModel plasticsModel = null;
 
-//Establishing all objects on the JavaFX page for view data
+//Establishing all objects on the JavaFX page for the view data page
 @FXML
 private TableView<PlasticsModel> datatable;
 
@@ -123,7 +118,7 @@ public void initialize(URL url, ResourceBundle resourceBundle) {
 String query = "SELECT FullName, Email, CountTotal, USAState, MaxSize, Season, ExperimentID FROM micromarinedb.plastics";
 con = ConnectSQL.GetCon();
 
-
+//Calling the query against the database
 try {
     st = con.prepareStatement(query);
     rs = st.executeQuery();
@@ -149,7 +144,6 @@ StateTableColumn.setCellValueFactory(new PropertyValueFactory<PlasticsModel, Str
 SizeTableColumn.setCellValueFactory(new PropertyValueFactory<PlasticsModel, Double>("size"));
 SeasonTableColumn.setCellValueFactory(new PropertyValueFactory<PlasticsModel, String>("season"));
 IDTableColumn.setCellValueFactory(new PropertyValueFactory<PlasticsModel, Integer>("experimentID"));
-
 datatable.setItems(plasticsModelObservableList);
 
 
@@ -226,7 +220,7 @@ public void backtosubmit() throws Exception {
     stage.close();
     Stage primaryStage = new Stage();
     Parent root = FXMLLoader.load(getClass().getResource("submit.fxml"));
-    primaryStage.setTitle("SUBMIT DATA PAGE");
+    primaryStage.setTitle("Submit Data Page");
     primaryStage.setScene((new Scene(root, 600, 650)));
     primaryStage.show();
 }

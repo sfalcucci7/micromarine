@@ -47,8 +47,11 @@
             <Tooltip text="Ready to submit more data? Click here!" />
          </tooltip>
       </Button>
-      <Label layoutX="48.0" layoutY="470.0" text="State with the most recorded plastics:" />
-      <Label fx:id="statequerylabel" layoutX="251.0" layoutY="470.0" text="---" />
+      <Label layoutX="48.0" layoutY="470.0" text="State with the most recorded plastics:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="statequerylabel" layoutX="266.0" layoutY="470.0" text="---" />
       <Label layoutX="266.0" layoutY="390.0" prefHeight="29.0" prefWidth="168.0" text="Data Summary" textFill="#1c75fc">
          <font>
             <Font name="Arial Black" size="20.0" />
@@ -61,10 +64,16 @@
             </Tooltip>
          </tooltip>
       </Label>
-      <Label layoutX="48.0" layoutY="439.0" text="Total microplastics recorded:" />
-      <Label fx:id="totalquerylabel" layoutX="206.0" layoutY="439.0" text="--" />
-      <Label layoutX="48.0" layoutY="501.0" text="Average max microplastic size:" />
-      <Label fx:id="sizequerylabel" layoutX="216.0" layoutY="501.0" text="----" />
+      <Label layoutX="48.0" layoutY="439.0" text="Total microplastics recorded:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="totalquerylabel" layoutX="218.0" layoutY="439.0" text="--" />
+      <Label layoutX="48.0" layoutY="501.0" text="Average max microplastic size:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="sizequerylabel" layoutX="225.0" layoutY="501.0" text="----" />
       <Button fx:id="exportbutton" layoutX="545.0" layoutY="435.0" mnemonicParsing="false" onAction="#exportaction" text="Export">
          <font>
             <Font name="System Bold" size="12.0" />

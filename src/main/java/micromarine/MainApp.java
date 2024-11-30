@@ -1,5 +1,3 @@
-////// [[[THIS IS A CORE IMPORTANT FILE]]]
-
 package micromarine;
 
 import java.io.IOException;
@@ -17,7 +15,7 @@ public class MainApp extends Application {
     public void start(Stage stage) throws IOException {
 Parent root = FXMLLoader.load(getClass().getResource("submit.fxml"));
 Scene scene = new Scene(root);
-stage.setTitle("SUBMIT DATA PAGE");
+stage.setTitle("Submit Data Page");
 stage.setScene(scene);
 stage.show();
 
@@ -25,7 +23,5 @@ stage.show();
 public static void main(String[] args) {
     launch();
 }
-// public Stage getStage() {
-//     throw new UnsupportedOperationException("Unimplemented method 'getStage'");
-// }
+
 }
